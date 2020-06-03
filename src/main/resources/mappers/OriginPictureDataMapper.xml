@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.boot.dao.OriginPictureDataMapper" >
+  <resultMap id="BaseResultMap" type="com.unionpay.boot.pojo.OriginPictureData" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="device_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="request_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.unionpay.boot.pojo.OriginPictureData" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="device_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="request_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="picture_byte" jdbcType="LONGVARBINARY" javaType="_byte[]" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, device_id, request_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    picture_byte
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.unionpay.boot.pojo.OriginPictureDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tbl_mui_check_data_originpicture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.OriginPictureDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_mui_check_data_originpicture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.unionpay.boot.pojo.OriginPictureDataKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tbl_mui_check_data_originpicture
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.unionpay.boot.pojo.OriginPictureDataKey" >
+    delete from tbl_mui_check_data_originpicture
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unionpay.boot.pojo.OriginPictureDataExample" >
+    delete from tbl_mui_check_data_originpicture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unionpay.boot.pojo.OriginPictureData" >
+    insert into tbl_mui_check_data_originpicture (id, device_id, request_time, 
+      picture_byte)
+    values (#{id,jdbcType=INTEGER}, #{deviceId,jdbcType=VARCHAR}, #{requestTime,jdbcType=TIMESTAMP}, 
+      #{pictureByte,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unionpay.boot.pojo.OriginPictureData" >
+    insert into tbl_mui_check_data_originpicture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="requestTime != null" >
+        request_time,
+      </if>
+      <if test="pictureByte != null" >
+        picture_byte,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null" >
+        #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureByte != null" >
+        #{pictureByte,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unionpay.boot.pojo.OriginPictureDataExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_mui_check_data_originpicture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_mui_check_data_originpicture
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceId != null" >
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestTime != null" >
+        request_time = #{record.requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pictureByte != null" >
+        picture_byte = #{record.pictureByte,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tbl_mui_check_data_originpicture
+    set id = #{record.id,jdbcType=INTEGER},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
+      request_time = #{record.requestTime,jdbcType=TIMESTAMP},
+      picture_byte = #{record.pictureByte,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_mui_check_data_originpicture
+    set id = #{record.id,jdbcType=INTEGER},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
+      request_time = #{record.requestTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unionpay.boot.pojo.OriginPictureData" >
+    update tbl_mui_check_data_originpicture
+    <set >
+      <if test="requestTime != null" >
+        request_time = #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureByte != null" >
+        picture_byte = #{pictureByte,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.unionpay.boot.pojo.OriginPictureData" >
+    update tbl_mui_check_data_originpicture
+    set request_time = #{requestTime,jdbcType=TIMESTAMP},
+      picture_byte = #{pictureByte,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unionpay.boot.pojo.OriginPictureData" >
+    update tbl_mui_check_data_originpicture
+    set request_time = #{requestTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

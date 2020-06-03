@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.boot.dao.posUploadInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.unionpay.boot.pojo.PosUploadInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="mchnt_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mchnt_nm" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="acquier_nm" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="acquier_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mchnt_tp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="term_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_nm" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_tp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="trans_tp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="trans_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="trans_at" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="is_pwd_micro" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="trans_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mchnt_cd, mchnt_nm, acquier_nm, acquier_cd, mchnt_tp, term_id, card_nm, card_tp, 
+    trans_tp, trans_cd, trans_at, is_pwd_micro, trans_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.PosUploadInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_phonepos_uploadinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.PosUploadInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_phonepos_uploadinfo
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.unionpay.boot.pojo.PosUploadInfoKey" >
+    delete from tbl_phonepos_uploadinfo
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unionpay.boot.pojo.PosUploadInfoExample" >
+    delete from tbl_phonepos_uploadinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unionpay.boot.pojo.PosUploadInfo" >
+    insert into tbl_phonepos_uploadinfo (id, mchnt_cd, mchnt_nm, 
+      acquier_nm, acquier_cd, mchnt_tp, 
+      term_id, card_nm, card_tp, 
+      trans_tp, trans_cd, trans_at, 
+      is_pwd_micro, trans_time)
+    values (#{id,jdbcType=INTEGER}, #{mchntCd,jdbcType=VARCHAR}, #{mchntNm,jdbcType=VARCHAR}, 
+      #{acquierNm,jdbcType=VARCHAR}, #{acquierCd,jdbcType=VARCHAR}, #{mchntTp,jdbcType=VARCHAR}, 
+      #{termId,jdbcType=VARCHAR}, #{cardNm,jdbcType=VARCHAR}, #{cardTp,jdbcType=VARCHAR}, 
+      #{transTp,jdbcType=VARCHAR}, #{transCd,jdbcType=VARCHAR}, #{transAt,jdbcType=DECIMAL}, 
+      #{isPwdMicro,jdbcType=BIT}, #{transTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unionpay.boot.pojo.PosUploadInfo" >
+    insert into tbl_phonepos_uploadinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mchntCd != null" >
+        mchnt_cd,
+      </if>
+      <if test="mchntNm != null" >
+        mchnt_nm,
+      </if>
+      <if test="acquierNm != null" >
+        acquier_nm,
+      </if>
+      <if test="acquierCd != null" >
+        acquier_cd,
+      </if>
+      <if test="mchntTp != null" >
+        mchnt_tp,
+      </if>
+      <if test="termId != null" >
+        term_id,
+      </if>
+      <if test="cardNm != null" >
+        card_nm,
+      </if>
+      <if test="cardTp != null" >
+        card_tp,
+      </if>
+      <if test="transTp != null" >
+        trans_tp,
+      </if>
+      <if test="transCd != null" >
+        trans_cd,
+      </if>
+      <if test="transAt != null" >
+        trans_at,
+      </if>
+      <if test="isPwdMicro != null" >
+        is_pwd_micro,
+      </if>
+      <if test="transTime != null" >
+        trans_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mchntCd != null" >
+        #{mchntCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntNm != null" >
+        #{mchntNm,jdbcType=VARCHAR},
+      </if>
+      <if test="acquierNm != null" >
+        #{acquierNm,jdbcType=VARCHAR},
+      </if>
+      <if test="acquierCd != null" >
+        #{acquierCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntTp != null" >
+        #{mchntTp,jdbcType=VARCHAR},
+      </if>
+      <if test="termId != null" >
+        #{termId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNm != null" >
+        #{cardNm,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTp != null" >
+        #{cardTp,jdbcType=VARCHAR},
+      </if>
+      <if test="transTp != null" >
+        #{transTp,jdbcType=VARCHAR},
+      </if>
+      <if test="transCd != null" >
+        #{transCd,jdbcType=VARCHAR},
+      </if>
+      <if test="transAt != null" >
+        #{transAt,jdbcType=DECIMAL},
+      </if>
+      <if test="isPwdMicro != null" >
+        #{isPwdMicro,jdbcType=BIT},
+      </if>
+      <if test="transTime != null" >
+        #{transTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unionpay.boot.pojo.PosUploadInfoExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_phonepos_uploadinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_phonepos_uploadinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mchntCd != null" >
+        mchnt_cd = #{record.mchntCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntNm != null" >
+        mchnt_nm = #{record.mchntNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquierNm != null" >
+        acquier_nm = #{record.acquierNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acquierCd != null" >
+        acquier_cd = #{record.acquierCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntTp != null" >
+        mchnt_tp = #{record.mchntTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termId != null" >
+        term_id = #{record.termId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNm != null" >
+        card_nm = #{record.cardNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardTp != null" >
+        card_tp = #{record.cardTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transTp != null" >
+        trans_tp = #{record.transTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transCd != null" >
+        trans_cd = #{record.transCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transAt != null" >
+        trans_at = #{record.transAt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isPwdMicro != null" >
+        is_pwd_micro = #{record.isPwdMicro,jdbcType=BIT},
+      </if>
+      <if test="record.transTime != null" >
+        trans_time = #{record.transTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_phonepos_uploadinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      mchnt_cd = #{record.mchntCd,jdbcType=VARCHAR},
+      mchnt_nm = #{record.mchntNm,jdbcType=VARCHAR},
+      acquier_nm = #{record.acquierNm,jdbcType=VARCHAR},
+      acquier_cd = #{record.acquierCd,jdbcType=VARCHAR},
+      mchnt_tp = #{record.mchntTp,jdbcType=VARCHAR},
+      term_id = #{record.termId,jdbcType=VARCHAR},
+      card_nm = #{record.cardNm,jdbcType=VARCHAR},
+      card_tp = #{record.cardTp,jdbcType=VARCHAR},
+      trans_tp = #{record.transTp,jdbcType=VARCHAR},
+      trans_cd = #{record.transCd,jdbcType=VARCHAR},
+      trans_at = #{record.transAt,jdbcType=DECIMAL},
+      is_pwd_micro = #{record.isPwdMicro,jdbcType=BIT},
+      trans_time = #{record.transTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unionpay.boot.pojo.PosUploadInfo" >
+    update tbl_phonepos_uploadinfo
+    <set >
+      <if test="mchntNm != null" >
+        mchnt_nm = #{mchntNm,jdbcType=VARCHAR},
+      </if>
+      <if test="acquierNm != null" >
+        acquier_nm = #{acquierNm,jdbcType=VARCHAR},
+      </if>
+      <if test="acquierCd != null" >
+        acquier_cd = #{acquierCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntTp != null" >
+        mchnt_tp = #{mchntTp,jdbcType=VARCHAR},
+      </if>
+      <if test="termId != null" >
+        term_id = #{termId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNm != null" >
+        card_nm = #{cardNm,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTp != null" >
+        card_tp = #{cardTp,jdbcType=VARCHAR},
+      </if>
+      <if test="transTp != null" >
+        trans_tp = #{transTp,jdbcType=VARCHAR},
+      </if>
+      <if test="transCd != null" >
+        trans_cd = #{transCd,jdbcType=VARCHAR},
+      </if>
+      <if test="transAt != null" >
+        trans_at = #{transAt,jdbcType=DECIMAL},
+      </if>
+      <if test="isPwdMicro != null" >
+        is_pwd_micro = #{isPwdMicro,jdbcType=BIT},
+      </if>
+      <if test="transTime != null" >
+        trans_time = #{transTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unionpay.boot.pojo.PosUploadInfo" >
+    update tbl_phonepos_uploadinfo
+    set mchnt_nm = #{mchntNm,jdbcType=VARCHAR},
+      acquier_nm = #{acquierNm,jdbcType=VARCHAR},
+      acquier_cd = #{acquierCd,jdbcType=VARCHAR},
+      mchnt_tp = #{mchntTp,jdbcType=VARCHAR},
+      term_id = #{termId,jdbcType=VARCHAR},
+      card_nm = #{cardNm,jdbcType=VARCHAR},
+      card_tp = #{cardTp,jdbcType=VARCHAR},
+      trans_tp = #{transTp,jdbcType=VARCHAR},
+      trans_cd = #{transCd,jdbcType=VARCHAR},
+      trans_at = #{transAt,jdbcType=DECIMAL},
+      is_pwd_micro = #{isPwdMicro,jdbcType=BIT},
+      trans_time = #{transTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </update>
+</mapper>

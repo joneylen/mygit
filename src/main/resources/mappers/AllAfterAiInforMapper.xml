@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.boot.dao.AllAfterAiInforMapper">
+
+    <select id="selectByPosAndTravel" resultType="com.unionpay.boot.Entity.AllMerchantsInfoResponseData">
+        SELECT
+  SUM(a.trans_at) AS trans_at,
+  NOW() AS tfr_dt_tm,
+  SUM(IF(a.mchnt_tp != 0, 1, 0)) AS mer_gen_count,
+  SUM(IF(a.mchnt_tp = 0, 1, 0)) AS mer_sm_count,
+  SUM(IF(b.status = 1, 1, 0)) AS trans_throw_count,
+  COUNT(1) AS trans_count,
+  COUNT(DISTINCT a.mchnt_cd) AS mer_total
+FROM
+  `tbl_phonepos_uploadinfo` a
+  JOIN `tbl_mui_check_data_result` b
+    ON a.`id` = b.`id`
+    AND a.`mchnt_cd` = b.`mer_id` ;
+    </select>
+
+  <select id="selectByAllAfterAiResultDataPageInfo" resultType="com.unionpay.boot.Entity.TransactionRecordResponseData" parameterType="map">
+    SELECT
+  a.`mchnt_nm`,
+  a.`trans_time`,
+  a.`trans_at`,
+  d.`sensor_pro`,
+  c.`bank_score`,
+  b.`score`,
+  b.`status`,
+  a.`mchnt_cd`
+
+FROM
+  `tbl_phonepos_uploadinfo` a
+  JOIN `tbl_mui_check_data_result` b
+    ON a.`id` = b.`id`
+    AND a.`mchnt_cd` = b.`mer_id`
+    JOIN `tbl_mui_check_data_picture` c
+    ON a.`id`=c.`id` AND a.`term_id`=c.`device_id`
+JOIN `tbl_mui_check_data_travel` d
+    where
+    1=1
+    <if test="startTime!=null and startTime!=''">
+      AND b.result_time &gt;= STR_TO_DATE(#{startTime},'%Y-%m-%d %H:%i:%s')
+    </if>
+
+    <!-- 查询条件：创建结束时间 -->
+    <if test="endTime!=null and endTime!=''">
+      AND b.result_time &lt;= STR_TO_DATE(#{endTime},'%Y-%m-%d %H:%i:%s')
+    </if>
+  </select>
+
+
+
+  <select id="selectTransactionStatisticsMapper" resultType="com.unionpay.boot.Entity.TransactionStatisticsData" parameterType="map">
+    SELECT
+    COUNT(1) AS tran_num,
+    SUM(IF(b.status = 0, 1, 0)) AS abn_tran_num,
+    NOW() AS tfr_dt_tm,
+    SUM(a.trans_at) AS tran_amount,
+    COUNT(DISTINCT a.mchnt_cd) AS mer_total,
+    SUM(IF(a.mchnt_tp = 0, 1, 0)) AS mer_sm_count,
+    SUM(IF(a.mchnt_tp != 0, 1, 0)) AS mer_gen_count
+    FROM
+    `tbl_phonepos_uploadinfo` a
+    JOIN `tbl_mui_check_data_result` b
+    ON a.`id` = b.`id`
+    AND a.`mchnt_cd` = b.`mer_id`
+    where
+      1=1
+      <if test="startTime!=null and startTime!=''">
+        AND a.trans_time &gt;= STR_TO_DATE(#{startTime},'%Y-%m-%d %H:%i:%s')
+      </if>
+
+      <!-- 查询条件：创建结束时间 -->
+      <if test="endTime!=null and endTime!=''">
+        AND a.trans_time &lt;= STR_TO_DATE(#{endTime},'%Y-%m-%d %H:%i:%s')
+      </if>
+
+  </select>
+
+
+</mapper>

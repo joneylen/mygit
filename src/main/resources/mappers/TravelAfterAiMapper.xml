@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.boot.dao.TravelAfterAiMapper" >
+  <resultMap id="BaseResultMap" type="com.unionpay.boot.pojo.TravelAfterAi" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="device_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="code" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="sensor_class" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sensor_pro" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="request_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="result_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, device_id, code, sensor_class, sensor_pro, request_time, result_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.TravelAfterAiExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_mui_check_data_travel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.TravelAfterAiKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_mui_check_data_travel
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.unionpay.boot.pojo.TravelAfterAiKey" >
+    delete from tbl_mui_check_data_travel
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unionpay.boot.pojo.TravelAfterAiExample" >
+    delete from tbl_mui_check_data_travel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unionpay.boot.pojo.TravelAfterAi" >
+    insert into tbl_mui_check_data_travel (id, device_id, code, 
+      sensor_class, sensor_pro, request_time, 
+      result_time)
+    values (#{id,jdbcType=INTEGER}, #{deviceId,jdbcType=VARCHAR}, #{code,jdbcType=SMALLINT}, 
+      #{sensorClass,jdbcType=INTEGER}, #{sensorPro,jdbcType=REAL}, #{requestTime,jdbcType=TIMESTAMP}, 
+      #{resultTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unionpay.boot.pojo.TravelAfterAi" >
+    insert into tbl_mui_check_data_travel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="sensorClass != null" >
+        sensor_class,
+      </if>
+      <if test="sensorPro != null" >
+        sensor_pro,
+      </if>
+      <if test="requestTime != null" >
+        request_time,
+      </if>
+      <if test="resultTime != null" >
+        result_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=SMALLINT},
+      </if>
+      <if test="sensorClass != null" >
+        #{sensorClass,jdbcType=INTEGER},
+      </if>
+      <if test="sensorPro != null" >
+        #{sensorPro,jdbcType=REAL},
+      </if>
+      <if test="requestTime != null" >
+        #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resultTime != null" >
+        #{resultTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unionpay.boot.pojo.TravelAfterAiExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_mui_check_data_travel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_mui_check_data_travel
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceId != null" >
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=SMALLINT},
+      </if>
+      <if test="record.sensorClass != null" >
+        sensor_class = #{record.sensorClass,jdbcType=INTEGER},
+      </if>
+      <if test="record.sensorPro != null" >
+        sensor_pro = #{record.sensorPro,jdbcType=REAL},
+      </if>
+      <if test="record.requestTime != null" >
+        request_time = #{record.requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.resultTime != null" >
+        result_time = #{record.resultTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_mui_check_data_travel
+    set id = #{record.id,jdbcType=INTEGER},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=SMALLINT},
+      sensor_class = #{record.sensorClass,jdbcType=INTEGER},
+      sensor_pro = #{record.sensorPro,jdbcType=REAL},
+      request_time = #{record.requestTime,jdbcType=TIMESTAMP},
+      result_time = #{record.resultTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unionpay.boot.pojo.TravelAfterAi" >
+    update tbl_mui_check_data_travel
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=SMALLINT},
+      </if>
+      <if test="sensorClass != null" >
+        sensor_class = #{sensorClass,jdbcType=INTEGER},
+      </if>
+      <if test="sensorPro != null" >
+        sensor_pro = #{sensorPro,jdbcType=REAL},
+      </if>
+      <if test="requestTime != null" >
+        request_time = #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resultTime != null" >
+        result_time = #{resultTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unionpay.boot.pojo.TravelAfterAi" >
+    update tbl_mui_check_data_travel
+    set code = #{code,jdbcType=SMALLINT},
+      sensor_class = #{sensorClass,jdbcType=INTEGER},
+      sensor_pro = #{sensorPro,jdbcType=REAL},
+      request_time = #{requestTime,jdbcType=TIMESTAMP},
+      result_time = #{resultTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

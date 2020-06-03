@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.boot.dao.MchantScoSysInfoProMapper" >
+  <resultMap id="BaseResultMap" type="com.unionpay.boot.pojo.MchantScoSysInfoPro" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="mchnt_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="num_succes_tr" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="amount_succes_tr" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="num_succes_tr_ret" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="amount_succes_tr_ret" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="num_pay_card" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="devia_amount" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="propor_credit_num" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="propor_credit_amount" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="propor_time" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="propor_ysf" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="propor_stripe" jdbcType="REAL" javaType="java.lang.Float" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mchnt_cd, num_succes_tr, amount_succes_tr, num_succes_tr_ret, amount_succes_tr_ret, 
+    num_pay_card, devia_amount, propor_credit_num, propor_credit_amount, propor_time, 
+    propor_ysf, propor_stripe
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoProExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_mchant_scores_system_info_proportion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoProKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_mchant_scores_system_info_proportion
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoProKey" >
+    delete from tbl_mchant_scores_system_info_proportion
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoProExample" >
+    delete from tbl_mchant_scores_system_info_proportion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoPro" >
+    insert into tbl_mchant_scores_system_info_proportion (id, mchnt_cd, num_succes_tr, 
+      amount_succes_tr, num_succes_tr_ret, amount_succes_tr_ret, 
+      num_pay_card, devia_amount, propor_credit_num, 
+      propor_credit_amount, propor_time, propor_ysf, 
+      propor_stripe)
+    values (#{id,jdbcType=INTEGER}, #{mchntCd,jdbcType=VARCHAR}, #{numSuccesTr,jdbcType=INTEGER}, 
+      #{amountSuccesTr,jdbcType=DECIMAL}, #{numSuccesTrRet,jdbcType=INTEGER}, #{amountSuccesTrRet,jdbcType=DECIMAL}, 
+      #{numPayCard,jdbcType=DOUBLE}, #{deviaAmount,jdbcType=DOUBLE}, #{proporCreditNum,jdbcType=REAL}, 
+      #{proporCreditAmount,jdbcType=REAL}, #{proporTime,jdbcType=DOUBLE}, #{proporYsf,jdbcType=REAL}, 
+      #{proporStripe,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoPro" >
+    insert into tbl_mchant_scores_system_info_proportion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mchntCd != null" >
+        mchnt_cd,
+      </if>
+      <if test="numSuccesTr != null" >
+        num_succes_tr,
+      </if>
+      <if test="amountSuccesTr != null" >
+        amount_succes_tr,
+      </if>
+      <if test="numSuccesTrRet != null" >
+        num_succes_tr_ret,
+      </if>
+      <if test="amountSuccesTrRet != null" >
+        amount_succes_tr_ret,
+      </if>
+      <if test="numPayCard != null" >
+        num_pay_card,
+      </if>
+      <if test="deviaAmount != null" >
+        devia_amount,
+      </if>
+      <if test="proporCreditNum != null" >
+        propor_credit_num,
+      </if>
+      <if test="proporCreditAmount != null" >
+        propor_credit_amount,
+      </if>
+      <if test="proporTime != null" >
+        propor_time,
+      </if>
+      <if test="proporYsf != null" >
+        propor_ysf,
+      </if>
+      <if test="proporStripe != null" >
+        propor_stripe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mchntCd != null" >
+        #{mchntCd,jdbcType=VARCHAR},
+      </if>
+      <if test="numSuccesTr != null" >
+        #{numSuccesTr,jdbcType=INTEGER},
+      </if>
+      <if test="amountSuccesTr != null" >
+        #{amountSuccesTr,jdbcType=DECIMAL},
+      </if>
+      <if test="numSuccesTrRet != null" >
+        #{numSuccesTrRet,jdbcType=INTEGER},
+      </if>
+      <if test="amountSuccesTrRet != null" >
+        #{amountSuccesTrRet,jdbcType=DECIMAL},
+      </if>
+      <if test="numPayCard != null" >
+        #{numPayCard,jdbcType=DOUBLE},
+      </if>
+      <if test="deviaAmount != null" >
+        #{deviaAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="proporCreditNum != null" >
+        #{proporCreditNum,jdbcType=REAL},
+      </if>
+      <if test="proporCreditAmount != null" >
+        #{proporCreditAmount,jdbcType=REAL},
+      </if>
+      <if test="proporTime != null" >
+        #{proporTime,jdbcType=DOUBLE},
+      </if>
+      <if test="proporYsf != null" >
+        #{proporYsf,jdbcType=REAL},
+      </if>
+      <if test="proporStripe != null" >
+        #{proporStripe,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoProExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_mchant_scores_system_info_proportion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_mchant_scores_system_info_proportion
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mchntCd != null" >
+        mchnt_cd = #{record.mchntCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numSuccesTr != null" >
+        num_succes_tr = #{record.numSuccesTr,jdbcType=INTEGER},
+      </if>
+      <if test="record.amountSuccesTr != null" >
+        amount_succes_tr = #{record.amountSuccesTr,jdbcType=DECIMAL},
+      </if>
+      <if test="record.numSuccesTrRet != null" >
+        num_succes_tr_ret = #{record.numSuccesTrRet,jdbcType=INTEGER},
+      </if>
+      <if test="record.amountSuccesTrRet != null" >
+        amount_succes_tr_ret = #{record.amountSuccesTrRet,jdbcType=DECIMAL},
+      </if>
+      <if test="record.numPayCard != null" >
+        num_pay_card = #{record.numPayCard,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deviaAmount != null" >
+        devia_amount = #{record.deviaAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.proporCreditNum != null" >
+        propor_credit_num = #{record.proporCreditNum,jdbcType=REAL},
+      </if>
+      <if test="record.proporCreditAmount != null" >
+        propor_credit_amount = #{record.proporCreditAmount,jdbcType=REAL},
+      </if>
+      <if test="record.proporTime != null" >
+        propor_time = #{record.proporTime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.proporYsf != null" >
+        propor_ysf = #{record.proporYsf,jdbcType=REAL},
+      </if>
+      <if test="record.proporStripe != null" >
+        propor_stripe = #{record.proporStripe,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_mchant_scores_system_info_proportion
+    set id = #{record.id,jdbcType=INTEGER},
+      mchnt_cd = #{record.mchntCd,jdbcType=VARCHAR},
+      num_succes_tr = #{record.numSuccesTr,jdbcType=INTEGER},
+      amount_succes_tr = #{record.amountSuccesTr,jdbcType=DECIMAL},
+      num_succes_tr_ret = #{record.numSuccesTrRet,jdbcType=INTEGER},
+      amount_succes_tr_ret = #{record.amountSuccesTrRet,jdbcType=DECIMAL},
+      num_pay_card = #{record.numPayCard,jdbcType=DOUBLE},
+      devia_amount = #{record.deviaAmount,jdbcType=DOUBLE},
+      propor_credit_num = #{record.proporCreditNum,jdbcType=REAL},
+      propor_credit_amount = #{record.proporCreditAmount,jdbcType=REAL},
+      propor_time = #{record.proporTime,jdbcType=DOUBLE},
+      propor_ysf = #{record.proporYsf,jdbcType=REAL},
+      propor_stripe = #{record.proporStripe,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoPro" >
+    update tbl_mchant_scores_system_info_proportion
+    <set >
+      <if test="numSuccesTr != null" >
+        num_succes_tr = #{numSuccesTr,jdbcType=INTEGER},
+      </if>
+      <if test="amountSuccesTr != null" >
+        amount_succes_tr = #{amountSuccesTr,jdbcType=DECIMAL},
+      </if>
+      <if test="numSuccesTrRet != null" >
+        num_succes_tr_ret = #{numSuccesTrRet,jdbcType=INTEGER},
+      </if>
+      <if test="amountSuccesTrRet != null" >
+        amount_succes_tr_ret = #{amountSuccesTrRet,jdbcType=DECIMAL},
+      </if>
+      <if test="numPayCard != null" >
+        num_pay_card = #{numPayCard,jdbcType=DOUBLE},
+      </if>
+      <if test="deviaAmount != null" >
+        devia_amount = #{deviaAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="proporCreditNum != null" >
+        propor_credit_num = #{proporCreditNum,jdbcType=REAL},
+      </if>
+      <if test="proporCreditAmount != null" >
+        propor_credit_amount = #{proporCreditAmount,jdbcType=REAL},
+      </if>
+      <if test="proporTime != null" >
+        propor_time = #{proporTime,jdbcType=DOUBLE},
+      </if>
+      <if test="proporYsf != null" >
+        propor_ysf = #{proporYsf,jdbcType=REAL},
+      </if>
+      <if test="proporStripe != null" >
+        propor_stripe = #{proporStripe,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoPro" >
+    update tbl_mchant_scores_system_info_proportion
+    set num_succes_tr = #{numSuccesTr,jdbcType=INTEGER},
+      amount_succes_tr = #{amountSuccesTr,jdbcType=DECIMAL},
+      num_succes_tr_ret = #{numSuccesTrRet,jdbcType=INTEGER},
+      amount_succes_tr_ret = #{amountSuccesTrRet,jdbcType=DECIMAL},
+      num_pay_card = #{numPayCard,jdbcType=DOUBLE},
+      devia_amount = #{deviaAmount,jdbcType=DOUBLE},
+      propor_credit_num = #{proporCreditNum,jdbcType=REAL},
+      propor_credit_amount = #{proporCreditAmount,jdbcType=REAL},
+      propor_time = #{proporTime,jdbcType=DOUBLE},
+      propor_ysf = #{proporYsf,jdbcType=REAL},
+      propor_stripe = #{proporStripe,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </update>
+</mapper>

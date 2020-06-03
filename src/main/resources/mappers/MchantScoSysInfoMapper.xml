@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.boot.dao.MchantScoSysInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.unionpay.boot.pojo.MchantScoSysInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="mchnt_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cup_branch_ins_id_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mchnt_cn_nm" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mchnt_cn_abbr" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="acq_ins_id_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="acpt_ins_id_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="acq_region_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mchnt_tp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="region_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="card_accpt_nm_addr" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mchnt_acpt_curr_bmp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mchnt_dft_curr_cd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="trans_chnl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="direct_acq_settle_in" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="mcc_appl_rule" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="industry_tp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mis_mchnt_in" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="lic_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="lic_expire_dt" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reg_addr" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reg_cap" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="spec_disc_tp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="spec_disc_lvl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mchnt_open_dt" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mchnt_cd, cup_branch_ins_id_cd, mchnt_cn_nm, mchnt_cn_abbr, acq_ins_id_cd, acpt_ins_id_cd, 
+    acq_region_cd, mchnt_tp, region_cd, card_accpt_nm_addr, mchnt_acpt_curr_bmp, mchnt_dft_curr_cd, 
+    trans_chnl, direct_acq_settle_in, mcc_appl_rule, industry_tp, mis_mchnt_in, lic_no, 
+    lic_expire_dt, reg_addr, reg_cap, spec_disc_tp, spec_disc_lvl, mchnt_open_dt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_mchant_scores_system_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_mchant_scores_system_info
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoKey" >
+    delete from tbl_mchant_scores_system_info
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoExample" >
+    delete from tbl_mchant_scores_system_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unionpay.boot.pojo.MchantScoSysInfo" >
+    insert into tbl_mchant_scores_system_info (id, mchnt_cd, cup_branch_ins_id_cd, 
+      mchnt_cn_nm, mchnt_cn_abbr, acq_ins_id_cd, 
+      acpt_ins_id_cd, acq_region_cd, mchnt_tp, 
+      region_cd, card_accpt_nm_addr, mchnt_acpt_curr_bmp, 
+      mchnt_dft_curr_cd, trans_chnl, direct_acq_settle_in, 
+      mcc_appl_rule, industry_tp, mis_mchnt_in, 
+      lic_no, lic_expire_dt, reg_addr, 
+      reg_cap, spec_disc_tp, spec_disc_lvl, 
+      mchnt_open_dt)
+    values (#{id,jdbcType=INTEGER}, #{mchntCd,jdbcType=VARCHAR}, #{cupBranchInsIdCd,jdbcType=VARCHAR}, 
+      #{mchntCnNm,jdbcType=VARCHAR}, #{mchntCnAbbr,jdbcType=VARCHAR}, #{acqInsIdCd,jdbcType=VARCHAR}, 
+      #{acptInsIdCd,jdbcType=VARCHAR}, #{acqRegionCd,jdbcType=VARCHAR}, #{mchntTp,jdbcType=VARCHAR}, 
+      #{regionCd,jdbcType=VARCHAR}, #{cardAccptNmAddr,jdbcType=VARCHAR}, #{mchntAcptCurrBmp,jdbcType=VARCHAR}, 
+      #{mchntDftCurrCd,jdbcType=VARCHAR}, #{transChnl,jdbcType=VARCHAR}, #{directAcqSettleIn,jdbcType=BIT}, 
+      #{mccApplRule,jdbcType=BIT}, #{industryTp,jdbcType=VARCHAR}, #{misMchntIn,jdbcType=BIT}, 
+      #{licNo,jdbcType=VARCHAR}, #{licExpireDt,jdbcType=VARCHAR}, #{regAddr,jdbcType=VARCHAR}, 
+      #{regCap,jdbcType=INTEGER}, #{specDiscTp,jdbcType=VARCHAR}, #{specDiscLvl,jdbcType=VARCHAR}, 
+      #{mchntOpenDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unionpay.boot.pojo.MchantScoSysInfo" >
+    insert into tbl_mchant_scores_system_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mchntCd != null" >
+        mchnt_cd,
+      </if>
+      <if test="cupBranchInsIdCd != null" >
+        cup_branch_ins_id_cd,
+      </if>
+      <if test="mchntCnNm != null" >
+        mchnt_cn_nm,
+      </if>
+      <if test="mchntCnAbbr != null" >
+        mchnt_cn_abbr,
+      </if>
+      <if test="acqInsIdCd != null" >
+        acq_ins_id_cd,
+      </if>
+      <if test="acptInsIdCd != null" >
+        acpt_ins_id_cd,
+      </if>
+      <if test="acqRegionCd != null" >
+        acq_region_cd,
+      </if>
+      <if test="mchntTp != null" >
+        mchnt_tp,
+      </if>
+      <if test="regionCd != null" >
+        region_cd,
+      </if>
+      <if test="cardAccptNmAddr != null" >
+        card_accpt_nm_addr,
+      </if>
+      <if test="mchntAcptCurrBmp != null" >
+        mchnt_acpt_curr_bmp,
+      </if>
+      <if test="mchntDftCurrCd != null" >
+        mchnt_dft_curr_cd,
+      </if>
+      <if test="transChnl != null" >
+        trans_chnl,
+      </if>
+      <if test="directAcqSettleIn != null" >
+        direct_acq_settle_in,
+      </if>
+      <if test="mccApplRule != null" >
+        mcc_appl_rule,
+      </if>
+      <if test="industryTp != null" >
+        industry_tp,
+      </if>
+      <if test="misMchntIn != null" >
+        mis_mchnt_in,
+      </if>
+      <if test="licNo != null" >
+        lic_no,
+      </if>
+      <if test="licExpireDt != null" >
+        lic_expire_dt,
+      </if>
+      <if test="regAddr != null" >
+        reg_addr,
+      </if>
+      <if test="regCap != null" >
+        reg_cap,
+      </if>
+      <if test="specDiscTp != null" >
+        spec_disc_tp,
+      </if>
+      <if test="specDiscLvl != null" >
+        spec_disc_lvl,
+      </if>
+      <if test="mchntOpenDt != null" >
+        mchnt_open_dt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mchntCd != null" >
+        #{mchntCd,jdbcType=VARCHAR},
+      </if>
+      <if test="cupBranchInsIdCd != null" >
+        #{cupBranchInsIdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntCnNm != null" >
+        #{mchntCnNm,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntCnAbbr != null" >
+        #{mchntCnAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="acqInsIdCd != null" >
+        #{acqInsIdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="acptInsIdCd != null" >
+        #{acptInsIdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="acqRegionCd != null" >
+        #{acqRegionCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntTp != null" >
+        #{mchntTp,jdbcType=VARCHAR},
+      </if>
+      <if test="regionCd != null" >
+        #{regionCd,jdbcType=VARCHAR},
+      </if>
+      <if test="cardAccptNmAddr != null" >
+        #{cardAccptNmAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntAcptCurrBmp != null" >
+        #{mchntAcptCurrBmp,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntDftCurrCd != null" >
+        #{mchntDftCurrCd,jdbcType=VARCHAR},
+      </if>
+      <if test="transChnl != null" >
+        #{transChnl,jdbcType=VARCHAR},
+      </if>
+      <if test="directAcqSettleIn != null" >
+        #{directAcqSettleIn,jdbcType=BIT},
+      </if>
+      <if test="mccApplRule != null" >
+        #{mccApplRule,jdbcType=BIT},
+      </if>
+      <if test="industryTp != null" >
+        #{industryTp,jdbcType=VARCHAR},
+      </if>
+      <if test="misMchntIn != null" >
+        #{misMchntIn,jdbcType=BIT},
+      </if>
+      <if test="licNo != null" >
+        #{licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="licExpireDt != null" >
+        #{licExpireDt,jdbcType=VARCHAR},
+      </if>
+      <if test="regAddr != null" >
+        #{regAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="regCap != null" >
+        #{regCap,jdbcType=INTEGER},
+      </if>
+      <if test="specDiscTp != null" >
+        #{specDiscTp,jdbcType=VARCHAR},
+      </if>
+      <if test="specDiscLvl != null" >
+        #{specDiscLvl,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntOpenDt != null" >
+        #{mchntOpenDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unionpay.boot.pojo.MchantScoSysInfoExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_mchant_scores_system_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_mchant_scores_system_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mchntCd != null" >
+        mchnt_cd = #{record.mchntCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cupBranchInsIdCd != null" >
+        cup_branch_ins_id_cd = #{record.cupBranchInsIdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntCnNm != null" >
+        mchnt_cn_nm = #{record.mchntCnNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntCnAbbr != null" >
+        mchnt_cn_abbr = #{record.mchntCnAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acqInsIdCd != null" >
+        acq_ins_id_cd = #{record.acqInsIdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acptInsIdCd != null" >
+        acpt_ins_id_cd = #{record.acptInsIdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acqRegionCd != null" >
+        acq_region_cd = #{record.acqRegionCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntTp != null" >
+        mchnt_tp = #{record.mchntTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionCd != null" >
+        region_cd = #{record.regionCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardAccptNmAddr != null" >
+        card_accpt_nm_addr = #{record.cardAccptNmAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntAcptCurrBmp != null" >
+        mchnt_acpt_curr_bmp = #{record.mchntAcptCurrBmp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntDftCurrCd != null" >
+        mchnt_dft_curr_cd = #{record.mchntDftCurrCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transChnl != null" >
+        trans_chnl = #{record.transChnl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.directAcqSettleIn != null" >
+        direct_acq_settle_in = #{record.directAcqSettleIn,jdbcType=BIT},
+      </if>
+      <if test="record.mccApplRule != null" >
+        mcc_appl_rule = #{record.mccApplRule,jdbcType=BIT},
+      </if>
+      <if test="record.industryTp != null" >
+        industry_tp = #{record.industryTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.misMchntIn != null" >
+        mis_mchnt_in = #{record.misMchntIn,jdbcType=BIT},
+      </if>
+      <if test="record.licNo != null" >
+        lic_no = #{record.licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licExpireDt != null" >
+        lic_expire_dt = #{record.licExpireDt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regAddr != null" >
+        reg_addr = #{record.regAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regCap != null" >
+        reg_cap = #{record.regCap,jdbcType=INTEGER},
+      </if>
+      <if test="record.specDiscTp != null" >
+        spec_disc_tp = #{record.specDiscTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specDiscLvl != null" >
+        spec_disc_lvl = #{record.specDiscLvl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntOpenDt != null" >
+        mchnt_open_dt = #{record.mchntOpenDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_mchant_scores_system_info
+    set id = #{record.id,jdbcType=INTEGER},
+      mchnt_cd = #{record.mchntCd,jdbcType=VARCHAR},
+      cup_branch_ins_id_cd = #{record.cupBranchInsIdCd,jdbcType=VARCHAR},
+      mchnt_cn_nm = #{record.mchntCnNm,jdbcType=VARCHAR},
+      mchnt_cn_abbr = #{record.mchntCnAbbr,jdbcType=VARCHAR},
+      acq_ins_id_cd = #{record.acqInsIdCd,jdbcType=VARCHAR},
+      acpt_ins_id_cd = #{record.acptInsIdCd,jdbcType=VARCHAR},
+      acq_region_cd = #{record.acqRegionCd,jdbcType=VARCHAR},
+      mchnt_tp = #{record.mchntTp,jdbcType=VARCHAR},
+      region_cd = #{record.regionCd,jdbcType=VARCHAR},
+      card_accpt_nm_addr = #{record.cardAccptNmAddr,jdbcType=VARCHAR},
+      mchnt_acpt_curr_bmp = #{record.mchntAcptCurrBmp,jdbcType=VARCHAR},
+      mchnt_dft_curr_cd = #{record.mchntDftCurrCd,jdbcType=VARCHAR},
+      trans_chnl = #{record.transChnl,jdbcType=VARCHAR},
+      direct_acq_settle_in = #{record.directAcqSettleIn,jdbcType=BIT},
+      mcc_appl_rule = #{record.mccApplRule,jdbcType=BIT},
+      industry_tp = #{record.industryTp,jdbcType=VARCHAR},
+      mis_mchnt_in = #{record.misMchntIn,jdbcType=BIT},
+      lic_no = #{record.licNo,jdbcType=VARCHAR},
+      lic_expire_dt = #{record.licExpireDt,jdbcType=VARCHAR},
+      reg_addr = #{record.regAddr,jdbcType=VARCHAR},
+      reg_cap = #{record.regCap,jdbcType=INTEGER},
+      spec_disc_tp = #{record.specDiscTp,jdbcType=VARCHAR},
+      spec_disc_lvl = #{record.specDiscLvl,jdbcType=VARCHAR},
+      mchnt_open_dt = #{record.mchntOpenDt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unionpay.boot.pojo.MchantScoSysInfo" >
+    update tbl_mchant_scores_system_info
+    <set >
+      <if test="cupBranchInsIdCd != null" >
+        cup_branch_ins_id_cd = #{cupBranchInsIdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntCnNm != null" >
+        mchnt_cn_nm = #{mchntCnNm,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntCnAbbr != null" >
+        mchnt_cn_abbr = #{mchntCnAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="acqInsIdCd != null" >
+        acq_ins_id_cd = #{acqInsIdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="acptInsIdCd != null" >
+        acpt_ins_id_cd = #{acptInsIdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="acqRegionCd != null" >
+        acq_region_cd = #{acqRegionCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntTp != null" >
+        mchnt_tp = #{mchntTp,jdbcType=VARCHAR},
+      </if>
+      <if test="regionCd != null" >
+        region_cd = #{regionCd,jdbcType=VARCHAR},
+      </if>
+      <if test="cardAccptNmAddr != null" >
+        card_accpt_nm_addr = #{cardAccptNmAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntAcptCurrBmp != null" >
+        mchnt_acpt_curr_bmp = #{mchntAcptCurrBmp,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntDftCurrCd != null" >
+        mchnt_dft_curr_cd = #{mchntDftCurrCd,jdbcType=VARCHAR},
+      </if>
+      <if test="transChnl != null" >
+        trans_chnl = #{transChnl,jdbcType=VARCHAR},
+      </if>
+      <if test="directAcqSettleIn != null" >
+        direct_acq_settle_in = #{directAcqSettleIn,jdbcType=BIT},
+      </if>
+      <if test="mccApplRule != null" >
+        mcc_appl_rule = #{mccApplRule,jdbcType=BIT},
+      </if>
+      <if test="industryTp != null" >
+        industry_tp = #{industryTp,jdbcType=VARCHAR},
+      </if>
+      <if test="misMchntIn != null" >
+        mis_mchnt_in = #{misMchntIn,jdbcType=BIT},
+      </if>
+      <if test="licNo != null" >
+        lic_no = #{licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="licExpireDt != null" >
+        lic_expire_dt = #{licExpireDt,jdbcType=VARCHAR},
+      </if>
+      <if test="regAddr != null" >
+        reg_addr = #{regAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="regCap != null" >
+        reg_cap = #{regCap,jdbcType=INTEGER},
+      </if>
+      <if test="specDiscTp != null" >
+        spec_disc_tp = #{specDiscTp,jdbcType=VARCHAR},
+      </if>
+      <if test="specDiscLvl != null" >
+        spec_disc_lvl = #{specDiscLvl,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntOpenDt != null" >
+        mchnt_open_dt = #{mchntOpenDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unionpay.boot.pojo.MchantScoSysInfo" >
+    update tbl_mchant_scores_system_info
+    set cup_branch_ins_id_cd = #{cupBranchInsIdCd,jdbcType=VARCHAR},
+      mchnt_cn_nm = #{mchntCnNm,jdbcType=VARCHAR},
+      mchnt_cn_abbr = #{mchntCnAbbr,jdbcType=VARCHAR},
+      acq_ins_id_cd = #{acqInsIdCd,jdbcType=VARCHAR},
+      acpt_ins_id_cd = #{acptInsIdCd,jdbcType=VARCHAR},
+      acq_region_cd = #{acqRegionCd,jdbcType=VARCHAR},
+      mchnt_tp = #{mchntTp,jdbcType=VARCHAR},
+      region_cd = #{regionCd,jdbcType=VARCHAR},
+      card_accpt_nm_addr = #{cardAccptNmAddr,jdbcType=VARCHAR},
+      mchnt_acpt_curr_bmp = #{mchntAcptCurrBmp,jdbcType=VARCHAR},
+      mchnt_dft_curr_cd = #{mchntDftCurrCd,jdbcType=VARCHAR},
+      trans_chnl = #{transChnl,jdbcType=VARCHAR},
+      direct_acq_settle_in = #{directAcqSettleIn,jdbcType=BIT},
+      mcc_appl_rule = #{mccApplRule,jdbcType=BIT},
+      industry_tp = #{industryTp,jdbcType=VARCHAR},
+      mis_mchnt_in = #{misMchntIn,jdbcType=BIT},
+      lic_no = #{licNo,jdbcType=VARCHAR},
+      lic_expire_dt = #{licExpireDt,jdbcType=VARCHAR},
+      reg_addr = #{regAddr,jdbcType=VARCHAR},
+      reg_cap = #{regCap,jdbcType=INTEGER},
+      spec_disc_tp = #{specDiscTp,jdbcType=VARCHAR},
+      spec_disc_lvl = #{specDiscLvl,jdbcType=VARCHAR},
+      mchnt_open_dt = #{mchntOpenDt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+      and mchnt_cd = #{mchntCd,jdbcType=VARCHAR}
+  </update>
+</mapper>

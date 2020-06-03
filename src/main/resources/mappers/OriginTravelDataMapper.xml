@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.boot.dao.OriginTravelDataMapper" >
+  <resultMap id="BaseResultMap" type="com.unionpay.boot.pojo.OriginTravelData" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="device_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="request_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="original_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="acc_x" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="acc_y" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="acc_z" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="gyro_x" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="gyro_y" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="gyro_z" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="mag_x" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="mag_y" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="mag_z" jdbcType="REAL" javaType="java.lang.Float" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, device_id, request_time, original_time, acc_x, acc_y, acc_z, gyro_x, gyro_y, 
+    gyro_z, mag_x, mag_y, mag_z
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.OriginTravelDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_mui_check_data_origintravel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.OriginTravelDataKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_mui_check_data_origintravel
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.unionpay.boot.pojo.OriginTravelDataKey" >
+    delete from tbl_mui_check_data_origintravel
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unionpay.boot.pojo.OriginTravelDataExample" >
+    delete from tbl_mui_check_data_origintravel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unionpay.boot.pojo.OriginTravelData" >
+    insert into tbl_mui_check_data_origintravel (id, device_id, request_time, 
+      original_time, acc_x, acc_y, 
+      acc_z, gyro_x, gyro_y, gyro_z, 
+      mag_x, mag_y, mag_z)
+    values (#{id,jdbcType=INTEGER}, #{deviceId,jdbcType=VARCHAR}, #{requestTime,jdbcType=TIMESTAMP}, 
+      #{originalTime,jdbcType=TIMESTAMP}, #{accX,jdbcType=REAL}, #{accY,jdbcType=REAL}, 
+      #{accZ,jdbcType=REAL}, #{gyroX,jdbcType=REAL}, #{gyroY,jdbcType=REAL}, #{gyroZ,jdbcType=REAL}, 
+      #{magX,jdbcType=REAL}, #{magY,jdbcType=REAL}, #{magZ,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unionpay.boot.pojo.OriginTravelData" >
+    insert into tbl_mui_check_data_origintravel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="requestTime != null" >
+        request_time,
+      </if>
+      <if test="originalTime != null" >
+        original_time,
+      </if>
+      <if test="accX != null" >
+        acc_x,
+      </if>
+      <if test="accY != null" >
+        acc_y,
+      </if>
+      <if test="accZ != null" >
+        acc_z,
+      </if>
+      <if test="gyroX != null" >
+        gyro_x,
+      </if>
+      <if test="gyroY != null" >
+        gyro_y,
+      </if>
+      <if test="gyroZ != null" >
+        gyro_z,
+      </if>
+      <if test="magX != null" >
+        mag_x,
+      </if>
+      <if test="magY != null" >
+        mag_y,
+      </if>
+      <if test="magZ != null" >
+        mag_z,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null" >
+        #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="originalTime != null" >
+        #{originalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accX != null" >
+        #{accX,jdbcType=REAL},
+      </if>
+      <if test="accY != null" >
+        #{accY,jdbcType=REAL},
+      </if>
+      <if test="accZ != null" >
+        #{accZ,jdbcType=REAL},
+      </if>
+      <if test="gyroX != null" >
+        #{gyroX,jdbcType=REAL},
+      </if>
+      <if test="gyroY != null" >
+        #{gyroY,jdbcType=REAL},
+      </if>
+      <if test="gyroZ != null" >
+        #{gyroZ,jdbcType=REAL},
+      </if>
+      <if test="magX != null" >
+        #{magX,jdbcType=REAL},
+      </if>
+      <if test="magY != null" >
+        #{magY,jdbcType=REAL},
+      </if>
+      <if test="magZ != null" >
+        #{magZ,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unionpay.boot.pojo.OriginTravelDataExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_mui_check_data_origintravel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_mui_check_data_origintravel
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceId != null" >
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestTime != null" >
+        request_time = #{record.requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.originalTime != null" >
+        original_time = #{record.originalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accX != null" >
+        acc_x = #{record.accX,jdbcType=REAL},
+      </if>
+      <if test="record.accY != null" >
+        acc_y = #{record.accY,jdbcType=REAL},
+      </if>
+      <if test="record.accZ != null" >
+        acc_z = #{record.accZ,jdbcType=REAL},
+      </if>
+      <if test="record.gyroX != null" >
+        gyro_x = #{record.gyroX,jdbcType=REAL},
+      </if>
+      <if test="record.gyroY != null" >
+        gyro_y = #{record.gyroY,jdbcType=REAL},
+      </if>
+      <if test="record.gyroZ != null" >
+        gyro_z = #{record.gyroZ,jdbcType=REAL},
+      </if>
+      <if test="record.magX != null" >
+        mag_x = #{record.magX,jdbcType=REAL},
+      </if>
+      <if test="record.magY != null" >
+        mag_y = #{record.magY,jdbcType=REAL},
+      </if>
+      <if test="record.magZ != null" >
+        mag_z = #{record.magZ,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_mui_check_data_origintravel
+    set id = #{record.id,jdbcType=INTEGER},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
+      request_time = #{record.requestTime,jdbcType=TIMESTAMP},
+      original_time = #{record.originalTime,jdbcType=TIMESTAMP},
+      acc_x = #{record.accX,jdbcType=REAL},
+      acc_y = #{record.accY,jdbcType=REAL},
+      acc_z = #{record.accZ,jdbcType=REAL},
+      gyro_x = #{record.gyroX,jdbcType=REAL},
+      gyro_y = #{record.gyroY,jdbcType=REAL},
+      gyro_z = #{record.gyroZ,jdbcType=REAL},
+      mag_x = #{record.magX,jdbcType=REAL},
+      mag_y = #{record.magY,jdbcType=REAL},
+      mag_z = #{record.magZ,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unionpay.boot.pojo.OriginTravelData" >
+    update tbl_mui_check_data_origintravel
+    <set >
+      <if test="requestTime != null" >
+        request_time = #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="originalTime != null" >
+        original_time = #{originalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accX != null" >
+        acc_x = #{accX,jdbcType=REAL},
+      </if>
+      <if test="accY != null" >
+        acc_y = #{accY,jdbcType=REAL},
+      </if>
+      <if test="accZ != null" >
+        acc_z = #{accZ,jdbcType=REAL},
+      </if>
+      <if test="gyroX != null" >
+        gyro_x = #{gyroX,jdbcType=REAL},
+      </if>
+      <if test="gyroY != null" >
+        gyro_y = #{gyroY,jdbcType=REAL},
+      </if>
+      <if test="gyroZ != null" >
+        gyro_z = #{gyroZ,jdbcType=REAL},
+      </if>
+      <if test="magX != null" >
+        mag_x = #{magX,jdbcType=REAL},
+      </if>
+      <if test="magY != null" >
+        mag_y = #{magY,jdbcType=REAL},
+      </if>
+      <if test="magZ != null" >
+        mag_z = #{magZ,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unionpay.boot.pojo.OriginTravelData" >
+    update tbl_mui_check_data_origintravel
+    set request_time = #{requestTime,jdbcType=TIMESTAMP},
+      original_time = #{originalTime,jdbcType=TIMESTAMP},
+      acc_x = #{accX,jdbcType=REAL},
+      acc_y = #{accY,jdbcType=REAL},
+      acc_z = #{accZ,jdbcType=REAL},
+      gyro_x = #{gyroX,jdbcType=REAL},
+      gyro_y = #{gyroY,jdbcType=REAL},
+      gyro_z = #{gyroZ,jdbcType=REAL},
+      mag_x = #{magX,jdbcType=REAL},
+      mag_y = #{magY,jdbcType=REAL},
+      mag_z = #{magZ,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

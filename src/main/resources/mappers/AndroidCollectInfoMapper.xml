@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.unionpay.boot.dao.AndroidCollectInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.unionpay.boot.pojo.AndroidCollectInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="device_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imei" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imsi" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="wifiMacAddress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="serialNumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="udid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="root" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="touchScreen" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="screenSize" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="screenResolution" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="deviceVersion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="deviceName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="osType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="osVersion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="osLanguage" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="appNumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="appVversion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="appChannel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sdkVersion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="usedStorage" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="availableStorage" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="batteryLevel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="basebandVersion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="country" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="timeZone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ip" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mobileSupplier" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mcc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mnc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bbsjd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ssid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="simulator" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="pkSignatureld" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pkSignatureldHash" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="collectTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="dfpSdkVersion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="gpslnfo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="telNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="netwkType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dnsAddress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="kernelVersion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cpuMode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="terminalType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="clientip" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, device_id, imei, imsi, wifiMacAddress, serialNumber, udid, root, touchScreen, 
+    screenSize, screenResolution, deviceVersion, deviceName, osType, osVersion, osLanguage, 
+    appNumber, appVversion, appChannel, sdkVersion, usedStorage, availableStorage, batteryLevel, 
+    basebandVersion, country, timeZone, ip, mobileSupplier, mcc, mnc, bbsjd, ssid, simulator, 
+    pkSignatureld, pkSignatureldHash, collectTime, dfpSdkVersion, gpslnfo, telNo, netwkType, 
+    dnsAddress, kernelVersion, cpuMode, terminalType, clientip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.unionpay.boot.pojo.AndroidCollectInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_android_collect_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_android_collect_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_android_collect_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.unionpay.boot.pojo.AndroidCollectInfoExample" >
+    delete from tbl_android_collect_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.unionpay.boot.pojo.AndroidCollectInfo" >
+    insert into tbl_android_collect_info (id, device_id, imei, 
+      imsi, wifiMacAddress, serialNumber, 
+      udid, root, touchScreen, screenSize, 
+      screenResolution, deviceVersion, deviceName, 
+      osType, osVersion, osLanguage, 
+      appNumber, appVversion, appChannel, 
+      sdkVersion, usedStorage, availableStorage, 
+      batteryLevel, basebandVersion, country, 
+      timeZone, ip, mobileSupplier, 
+      mcc, mnc, bbsjd, ssid, 
+      simulator, pkSignatureld, pkSignatureldHash, 
+      collectTime, dfpSdkVersion, gpslnfo, 
+      telNo, netwkType, dnsAddress, 
+      kernelVersion, cpuMode, terminalType, 
+      clientip)
+    values (#{id,jdbcType=INTEGER}, #{deviceId,jdbcType=VARCHAR}, #{imei,jdbcType=VARCHAR}, 
+      #{imsi,jdbcType=VARCHAR}, #{wifimacaddress,jdbcType=VARCHAR}, #{serialnumber,jdbcType=VARCHAR}, 
+      #{udid,jdbcType=VARCHAR}, #{root,jdbcType=BIT}, #{touchscreen,jdbcType=BIT}, #{screensize,jdbcType=VARCHAR}, 
+      #{screenresolution,jdbcType=VARCHAR}, #{deviceversion,jdbcType=VARCHAR}, #{devicename,jdbcType=VARCHAR}, 
+      #{ostype,jdbcType=VARCHAR}, #{osversion,jdbcType=VARCHAR}, #{oslanguage,jdbcType=VARCHAR}, 
+      #{appnumber,jdbcType=VARCHAR}, #{appvversion,jdbcType=VARCHAR}, #{appchannel,jdbcType=VARCHAR}, 
+      #{sdkversion,jdbcType=VARCHAR}, #{usedstorage,jdbcType=VARCHAR}, #{availablestorage,jdbcType=VARCHAR}, 
+      #{batterylevel,jdbcType=VARCHAR}, #{basebandversion,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{timezone,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{mobilesupplier,jdbcType=VARCHAR}, 
+      #{mcc,jdbcType=VARCHAR}, #{mnc,jdbcType=VARCHAR}, #{bbsjd,jdbcType=VARCHAR}, #{ssid,jdbcType=VARCHAR}, 
+      #{simulator,jdbcType=BIT}, #{pksignatureld,jdbcType=VARCHAR}, #{pksignatureldhash,jdbcType=VARCHAR}, 
+      #{collecttime,jdbcType=TIMESTAMP}, #{dfpsdkversion,jdbcType=VARCHAR}, #{gpslnfo,jdbcType=VARCHAR}, 
+      #{telno,jdbcType=VARCHAR}, #{netwktype,jdbcType=VARCHAR}, #{dnsaddress,jdbcType=VARCHAR}, 
+      #{kernelversion,jdbcType=VARCHAR}, #{cpumode,jdbcType=VARCHAR}, #{terminaltype,jdbcType=VARCHAR}, 
+      #{clientip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unionpay.boot.pojo.AndroidCollectInfo" >
+    insert into tbl_android_collect_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="imei != null" >
+        imei,
+      </if>
+      <if test="imsi != null" >
+        imsi,
+      </if>
+      <if test="wifimacaddress != null" >
+        wifiMacAddress,
+      </if>
+      <if test="serialnumber != null" >
+        serialNumber,
+      </if>
+      <if test="udid != null" >
+        udid,
+      </if>
+      <if test="root != null" >
+        root,
+      </if>
+      <if test="touchscreen != null" >
+        touchScreen,
+      </if>
+      <if test="screensize != null" >
+        screenSize,
+      </if>
+      <if test="screenresolution != null" >
+        screenResolution,
+      </if>
+      <if test="deviceversion != null" >
+        deviceVersion,
+      </if>
+      <if test="devicename != null" >
+        deviceName,
+      </if>
+      <if test="ostype != null" >
+        osType,
+      </if>
+      <if test="osversion != null" >
+        osVersion,
+      </if>
+      <if test="oslanguage != null" >
+        osLanguage,
+      </if>
+      <if test="appnumber != null" >
+        appNumber,
+      </if>
+      <if test="appvversion != null" >
+        appVversion,
+      </if>
+      <if test="appchannel != null" >
+        appChannel,
+      </if>
+      <if test="sdkversion != null" >
+        sdkVersion,
+      </if>
+      <if test="usedstorage != null" >
+        usedStorage,
+      </if>
+      <if test="availablestorage != null" >
+        availableStorage,
+      </if>
+      <if test="batterylevel != null" >
+        batteryLevel,
+      </if>
+      <if test="basebandversion != null" >
+        basebandVersion,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="timezone != null" >
+        timeZone,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="mobilesupplier != null" >
+        mobileSupplier,
+      </if>
+      <if test="mcc != null" >
+        mcc,
+      </if>
+      <if test="mnc != null" >
+        mnc,
+      </if>
+      <if test="bbsjd != null" >
+        bbsjd,
+      </if>
+      <if test="ssid != null" >
+        ssid,
+      </if>
+      <if test="simulator != null" >
+        simulator,
+      </if>
+      <if test="pksignatureld != null" >
+        pkSignatureld,
+      </if>
+      <if test="pksignatureldhash != null" >
+        pkSignatureldHash,
+      </if>
+      <if test="collecttime != null" >
+        collectTime,
+      </if>
+      <if test="dfpsdkversion != null" >
+        dfpSdkVersion,
+      </if>
+      <if test="gpslnfo != null" >
+        gpslnfo,
+      </if>
+      <if test="telno != null" >
+        telNo,
+      </if>
+      <if test="netwktype != null" >
+        netwkType,
+      </if>
+      <if test="dnsaddress != null" >
+        dnsAddress,
+      </if>
+      <if test="kernelversion != null" >
+        kernelVersion,
+      </if>
+      <if test="cpumode != null" >
+        cpuMode,
+      </if>
+      <if test="terminaltype != null" >
+        terminalType,
+      </if>
+      <if test="clientip != null" >
+        clientip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null" >
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="imsi != null" >
+        #{imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="wifimacaddress != null" >
+        #{wifimacaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null" >
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="udid != null" >
+        #{udid,jdbcType=VARCHAR},
+      </if>
+      <if test="root != null" >
+        #{root,jdbcType=BIT},
+      </if>
+      <if test="touchscreen != null" >
+        #{touchscreen,jdbcType=BIT},
+      </if>
+      <if test="screensize != null" >
+        #{screensize,jdbcType=VARCHAR},
+      </if>
+      <if test="screenresolution != null" >
+        #{screenresolution,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceversion != null" >
+        #{deviceversion,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="ostype != null" >
+        #{ostype,jdbcType=VARCHAR},
+      </if>
+      <if test="osversion != null" >
+        #{osversion,jdbcType=VARCHAR},
+      </if>
+      <if test="oslanguage != null" >
+        #{oslanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="appnumber != null" >
+        #{appnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="appvversion != null" >
+        #{appvversion,jdbcType=VARCHAR},
+      </if>
+      <if test="appchannel != null" >
+        #{appchannel,jdbcType=VARCHAR},
+      </if>
+      <if test="sdkversion != null" >
+        #{sdkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="usedstorage != null" >
+        #{usedstorage,jdbcType=VARCHAR},
+      </if>
+      <if test="availablestorage != null" >
+        #{availablestorage,jdbcType=VARCHAR},
+      </if>
+      <if test="batterylevel != null" >
+        #{batterylevel,jdbcType=VARCHAR},
+      </if>
+      <if test="basebandversion != null" >
+        #{basebandversion,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="timezone != null" >
+        #{timezone,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilesupplier != null" >
+        #{mobilesupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="mcc != null" >
+        #{mcc,jdbcType=VARCHAR},
+      </if>
+      <if test="mnc != null" >
+        #{mnc,jdbcType=VARCHAR},
+      </if>
+      <if test="bbsjd != null" >
+        #{bbsjd,jdbcType=VARCHAR},
+      </if>
+      <if test="ssid != null" >
+        #{ssid,jdbcType=VARCHAR},
+      </if>
+      <if test="simulator != null" >
+        #{simulator,jdbcType=BIT},
+      </if>
+      <if test="pksignatureld != null" >
+        #{pksignatureld,jdbcType=VARCHAR},
+      </if>
+      <if test="pksignatureldhash != null" >
+        #{pksignatureldhash,jdbcType=VARCHAR},
+      </if>
+      <if test="collecttime != null" >
+        #{collecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dfpsdkversion != null" >
+        #{dfpsdkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="gpslnfo != null" >
+        #{gpslnfo,jdbcType=VARCHAR},
+      </if>
+      <if test="telno != null" >
+        #{telno,jdbcType=VARCHAR},
+      </if>
+      <if test="netwktype != null" >
+        #{netwktype,jdbcType=VARCHAR},
+      </if>
+      <if test="dnsaddress != null" >
+        #{dnsaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="kernelversion != null" >
+        #{kernelversion,jdbcType=VARCHAR},
+      </if>
+      <if test="cpumode != null" >
+        #{cpumode,jdbcType=VARCHAR},
+      </if>
+      <if test="terminaltype != null" >
+        #{terminaltype,jdbcType=VARCHAR},
+      </if>
+      <if test="clientip != null" >
+        #{clientip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.unionpay.boot.pojo.AndroidCollectInfoExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_android_collect_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_android_collect_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceId != null" >
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imei != null" >
+        imei = #{record.imei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imsi != null" >
+        imsi = #{record.imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wifimacaddress != null" >
+        wifiMacAddress = #{record.wifimacaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialnumber != null" >
+        serialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.udid != null" >
+        udid = #{record.udid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.root != null" >
+        root = #{record.root,jdbcType=BIT},
+      </if>
+      <if test="record.touchscreen != null" >
+        touchScreen = #{record.touchscreen,jdbcType=BIT},
+      </if>
+      <if test="record.screensize != null" >
+        screenSize = #{record.screensize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.screenresolution != null" >
+        screenResolution = #{record.screenresolution,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceversion != null" >
+        deviceVersion = #{record.deviceversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicename != null" >
+        deviceName = #{record.devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ostype != null" >
+        osType = #{record.ostype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osversion != null" >
+        osVersion = #{record.osversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oslanguage != null" >
+        osLanguage = #{record.oslanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appnumber != null" >
+        appNumber = #{record.appnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appvversion != null" >
+        appVversion = #{record.appvversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appchannel != null" >
+        appChannel = #{record.appchannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdkversion != null" >
+        sdkVersion = #{record.sdkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usedstorage != null" >
+        usedStorage = #{record.usedstorage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.availablestorage != null" >
+        availableStorage = #{record.availablestorage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batterylevel != null" >
+        batteryLevel = #{record.batterylevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basebandversion != null" >
+        basebandVersion = #{record.basebandversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timezone != null" >
+        timeZone = #{record.timezone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilesupplier != null" >
+        mobileSupplier = #{record.mobilesupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mcc != null" >
+        mcc = #{record.mcc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mnc != null" >
+        mnc = #{record.mnc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bbsjd != null" >
+        bbsjd = #{record.bbsjd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssid != null" >
+        ssid = #{record.ssid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.simulator != null" >
+        simulator = #{record.simulator,jdbcType=BIT},
+      </if>
+      <if test="record.pksignatureld != null" >
+        pkSignatureld = #{record.pksignatureld,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pksignatureldhash != null" >
+        pkSignatureldHash = #{record.pksignatureldhash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collecttime != null" >
+        collectTime = #{record.collecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dfpsdkversion != null" >
+        dfpSdkVersion = #{record.dfpsdkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gpslnfo != null" >
+        gpslnfo = #{record.gpslnfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telno != null" >
+        telNo = #{record.telno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netwktype != null" >
+        netwkType = #{record.netwktype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dnsaddress != null" >
+        dnsAddress = #{record.dnsaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kernelversion != null" >
+        kernelVersion = #{record.kernelversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpumode != null" >
+        cpuMode = #{record.cpumode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminaltype != null" >
+        terminalType = #{record.terminaltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientip != null" >
+        clientip = #{record.clientip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_android_collect_info
+    set id = #{record.id,jdbcType=INTEGER},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
+      imei = #{record.imei,jdbcType=VARCHAR},
+      imsi = #{record.imsi,jdbcType=VARCHAR},
+      wifiMacAddress = #{record.wifimacaddress,jdbcType=VARCHAR},
+      serialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      udid = #{record.udid,jdbcType=VARCHAR},
+      root = #{record.root,jdbcType=BIT},
+      touchScreen = #{record.touchscreen,jdbcType=BIT},
+      screenSize = #{record.screensize,jdbcType=VARCHAR},
+      screenResolution = #{record.screenresolution,jdbcType=VARCHAR},
+      deviceVersion = #{record.deviceversion,jdbcType=VARCHAR},
+      deviceName = #{record.devicename,jdbcType=VARCHAR},
+      osType = #{record.ostype,jdbcType=VARCHAR},
+      osVersion = #{record.osversion,jdbcType=VARCHAR},
+      osLanguage = #{record.oslanguage,jdbcType=VARCHAR},
+      appNumber = #{record.appnumber,jdbcType=VARCHAR},
+      appVversion = #{record.appvversion,jdbcType=VARCHAR},
+      appChannel = #{record.appchannel,jdbcType=VARCHAR},
+      sdkVersion = #{record.sdkversion,jdbcType=VARCHAR},
+      usedStorage = #{record.usedstorage,jdbcType=VARCHAR},
+      availableStorage = #{record.availablestorage,jdbcType=VARCHAR},
+      batteryLevel = #{record.batterylevel,jdbcType=VARCHAR},
+      basebandVersion = #{record.basebandversion,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      timeZone = #{record.timezone,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      mobileSupplier = #{record.mobilesupplier,jdbcType=VARCHAR},
+      mcc = #{record.mcc,jdbcType=VARCHAR},
+      mnc = #{record.mnc,jdbcType=VARCHAR},
+      bbsjd = #{record.bbsjd,jdbcType=VARCHAR},
+      ssid = #{record.ssid,jdbcType=VARCHAR},
+      simulator = #{record.simulator,jdbcType=BIT},
+      pkSignatureld = #{record.pksignatureld,jdbcType=VARCHAR},
+      pkSignatureldHash = #{record.pksignatureldhash,jdbcType=VARCHAR},
+      collectTime = #{record.collecttime,jdbcType=TIMESTAMP},
+      dfpSdkVersion = #{record.dfpsdkversion,jdbcType=VARCHAR},
+      gpslnfo = #{record.gpslnfo,jdbcType=VARCHAR},
+      telNo = #{record.telno,jdbcType=VARCHAR},
+      netwkType = #{record.netwktype,jdbcType=VARCHAR},
+      dnsAddress = #{record.dnsaddress,jdbcType=VARCHAR},
+      kernelVersion = #{record.kernelversion,jdbcType=VARCHAR},
+      cpuMode = #{record.cpumode,jdbcType=VARCHAR},
+      terminalType = #{record.terminaltype,jdbcType=VARCHAR},
+      clientip = #{record.clientip,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unionpay.boot.pojo.AndroidCollectInfo" >
+    update tbl_android_collect_info
+    <set >
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null" >
+        imei = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="imsi != null" >
+        imsi = #{imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="wifimacaddress != null" >
+        wifiMacAddress = #{wifimacaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumber != null" >
+        serialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="udid != null" >
+        udid = #{udid,jdbcType=VARCHAR},
+      </if>
+      <if test="root != null" >
+        root = #{root,jdbcType=BIT},
+      </if>
+      <if test="touchscreen != null" >
+        touchScreen = #{touchscreen,jdbcType=BIT},
+      </if>
+      <if test="screensize != null" >
+        screenSize = #{screensize,jdbcType=VARCHAR},
+      </if>
+      <if test="screenresolution != null" >
+        screenResolution = #{screenresolution,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceversion != null" >
+        deviceVersion = #{deviceversion,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        deviceName = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="ostype != null" >
+        osType = #{ostype,jdbcType=VARCHAR},
+      </if>
+      <if test="osversion != null" >
+        osVersion = #{osversion,jdbcType=VARCHAR},
+      </if>
+      <if test="oslanguage != null" >
+        osLanguage = #{oslanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="appnumber != null" >
+        appNumber = #{appnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="appvversion != null" >
+        appVversion = #{appvversion,jdbcType=VARCHAR},
+      </if>
+      <if test="appchannel != null" >
+        appChannel = #{appchannel,jdbcType=VARCHAR},
+      </if>
+      <if test="sdkversion != null" >
+        sdkVersion = #{sdkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="usedstorage != null" >
+        usedStorage = #{usedstorage,jdbcType=VARCHAR},
+      </if>
+      <if test="availablestorage != null" >
+        availableStorage = #{availablestorage,jdbcType=VARCHAR},
+      </if>
+      <if test="batterylevel != null" >
+        batteryLevel = #{batterylevel,jdbcType=VARCHAR},
+      </if>
+      <if test="basebandversion != null" >
+        basebandVersion = #{basebandversion,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="timezone != null" >
+        timeZone = #{timezone,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilesupplier != null" >
+        mobileSupplier = #{mobilesupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="mcc != null" >
+        mcc = #{mcc,jdbcType=VARCHAR},
+      </if>
+      <if test="mnc != null" >
+        mnc = #{mnc,jdbcType=VARCHAR},
+      </if>
+      <if test="bbsjd != null" >
+        bbsjd = #{bbsjd,jdbcType=VARCHAR},
+      </if>
+      <if test="ssid != null" >
+        ssid = #{ssid,jdbcType=VARCHAR},
+      </if>
+      <if test="simulator != null" >
+        simulator = #{simulator,jdbcType=BIT},
+      </if>
+      <if test="pksignatureld != null" >
+        pkSignatureld = #{pksignatureld,jdbcType=VARCHAR},
+      </if>
+      <if test="pksignatureldhash != null" >
+        pkSignatureldHash = #{pksignatureldhash,jdbcType=VARCHAR},
+      </if>
+      <if test="collecttime != null" >
+        collectTime = #{collecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dfpsdkversion != null" >
+        dfpSdkVersion = #{dfpsdkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="gpslnfo != null" >
+        gpslnfo = #{gpslnfo,jdbcType=VARCHAR},
+      </if>
+      <if test="telno != null" >
+        telNo = #{telno,jdbcType=VARCHAR},
+      </if>
+      <if test="netwktype != null" >
+        netwkType = #{netwktype,jdbcType=VARCHAR},
+      </if>
+      <if test="dnsaddress != null" >
+        dnsAddress = #{dnsaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="kernelversion != null" >
+        kernelVersion = #{kernelversion,jdbcType=VARCHAR},
+      </if>
+      <if test="cpumode != null" >
+        cpuMode = #{cpumode,jdbcType=VARCHAR},
+      </if>
+      <if test="terminaltype != null" >
+        terminalType = #{terminaltype,jdbcType=VARCHAR},
+      </if>
+      <if test="clientip != null" >
+        clientip = #{clientip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unionpay.boot.pojo.AndroidCollectInfo" >
+    update tbl_android_collect_info
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      imei = #{imei,jdbcType=VARCHAR},
+      imsi = #{imsi,jdbcType=VARCHAR},
+      wifiMacAddress = #{wifimacaddress,jdbcType=VARCHAR},
+      serialNumber = #{serialnumber,jdbcType=VARCHAR},
+      udid = #{udid,jdbcType=VARCHAR},
+      root = #{root,jdbcType=BIT},
+      touchScreen = #{touchscreen,jdbcType=BIT},
+      screenSize = #{screensize,jdbcType=VARCHAR},
+      screenResolution = #{screenresolution,jdbcType=VARCHAR},
+      deviceVersion = #{deviceversion,jdbcType=VARCHAR},
+      deviceName = #{devicename,jdbcType=VARCHAR},
+      osType = #{ostype,jdbcType=VARCHAR},
+      osVersion = #{osversion,jdbcType=VARCHAR},
+      osLanguage = #{oslanguage,jdbcType=VARCHAR},
+      appNumber = #{appnumber,jdbcType=VARCHAR},
+      appVversion = #{appvversion,jdbcType=VARCHAR},
+      appChannel = #{appchannel,jdbcType=VARCHAR},
+      sdkVersion = #{sdkversion,jdbcType=VARCHAR},
+      usedStorage = #{usedstorage,jdbcType=VARCHAR},
+      availableStorage = #{availablestorage,jdbcType=VARCHAR},
+      batteryLevel = #{batterylevel,jdbcType=VARCHAR},
+      basebandVersion = #{basebandversion,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      timeZone = #{timezone,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      mobileSupplier = #{mobilesupplier,jdbcType=VARCHAR},
+      mcc = #{mcc,jdbcType=VARCHAR},
+      mnc = #{mnc,jdbcType=VARCHAR},
+      bbsjd = #{bbsjd,jdbcType=VARCHAR},
+      ssid = #{ssid,jdbcType=VARCHAR},
+      simulator = #{simulator,jdbcType=BIT},
+      pkSignatureld = #{pksignatureld,jdbcType=VARCHAR},
+      pkSignatureldHash = #{pksignatureldhash,jdbcType=VARCHAR},
+      collectTime = #{collecttime,jdbcType=TIMESTAMP},
+      dfpSdkVersion = #{dfpsdkversion,jdbcType=VARCHAR},
+      gpslnfo = #{gpslnfo,jdbcType=VARCHAR},
+      telNo = #{telno,jdbcType=VARCHAR},
+      netwkType = #{netwktype,jdbcType=VARCHAR},
+      dnsAddress = #{dnsaddress,jdbcType=VARCHAR},
+      kernelVersion = #{kernelversion,jdbcType=VARCHAR},
+      cpuMode = #{cpumode,jdbcType=VARCHAR},
+      terminalType = #{terminaltype,jdbcType=VARCHAR},
+      clientip = #{clientip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
